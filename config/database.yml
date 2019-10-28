@@ -15,7 +15,6 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
   password:
-  socket: /tmp/mysql.sock
 
 development:
   <<: *default
@@ -50,5 +49,7 @@ test:
 production:
   <<: *default
   database: ac_gantt_tool_production
-  username: ac_gantt_tool
+  username: <%= ENV['PRD_DB_USER_NAME'] %>
   password: <%= ENV['AC_GANTT_TOOL_DATABASE_PASSWORD'] %>
+  port: 3306
+  host: <%= ENV['PRD_DB_HOST'] %>
