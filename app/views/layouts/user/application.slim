@@ -1,0 +1,36 @@
+doctype html
+html
+  head
+    title AcGanttTool
+    = stylesheet_link_tag "application", media: "all"
+
+    = javascript_include_tag "application"
+
+    = csrf_meta_tags
+
+    = stylesheet_link_tag "https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+    
+    = stylesheet_link_tag "http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css"
+
+  body.skin-blue.sidebar-mini
+    .wrapper
+      = render "layouts/user/header"
+      /! ===============================================
+      = render "layouts/user/sidebar" 
+      /! ===============================================
+      /! Content Wrapper. Contains page content
+      .content-wrapper
+        /! Content Header (Page header)
+        section.content-header
+          .row
+            == breadcrumbs style: :bootstrap, display_single_fragment: true
+        /! Main content
+        section.content
+          .flash
+            = render "layouts/shared/flash"
+          = yield
+        /! /.content
+      /! /.content-wrapper
+      footer.main-footer
+        strong
+          | Copyright © 2019 All rights reserved.

@@ -1,0 +1,33 @@
+aside.main-sidebar
+  /! sidebar: style can be found in sidebar.less
+  section.sidebar
+    /! Sidebar user panel
+    .user-panel
+      .pull-left.image
+        = image_tag "http://via.placeholder.com/50x50", class: "img-circle"
+      .info
+        p = current_user.email.truncate(20)
+        span
+          i.fa.fa-circle.text-success
+          = " Online"
+    /! sidebar menu: : style can be found in sidebar.less
+    ul.sidebar-menu data-widget="tree"
+      li.header Gantt Tool
+      li
+        = link_to root_path do
+          i.fa.fa-home
+          span = t ".home"
+      / li class="#{content_for :media_list_activation}"
+      /   = link_to user_target_media_path do
+      /     span = t(".list_media")
+      / li class="#{content_for :history_list_activation}"
+      /   = link_to user_crawl_histories_path do
+      /     span = t(".list_crawl_histories")
+      / li.header PHP SALES SUPPORT DB
+      / li class="#{content_for :company_list_activation}"
+      /   = link_to user_companies_path do
+      /     span = t(".company_list")
+      / li class="#{content_for :import_history_list_activation}"
+      /   = link_to user_import_histories_path do
+      /     span = t(".import_history_list")
+  /! /.sidebar'
