@@ -76,3 +76,5 @@ gem 'config'
 gem 'font-awesome-rails'
 
 gem 'gretel'
+
+gem 'rails_12factor', group: :production
