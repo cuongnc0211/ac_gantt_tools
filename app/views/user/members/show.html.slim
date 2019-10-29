@@ -1,0 +1,14 @@
+.box
+  .box-body
+    h1 Listing members
+    => link_to 'Edit', edit_user_member_path(@user_member)
+    '|
+    =< link_to 'Back', user_members_path
+  .box-footer
+    table.table.table-striped.table-hover
+      tr
+        td = t ".name"
+        td = @user_member.name
+      tr
+        td = t ".color"
+        td = @user_member.color

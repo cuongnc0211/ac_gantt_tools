@@ -1,0 +1,8 @@
+.box
+  .box-body
+    h1 Editing user_member
+    => link_to 'Show', user_member_path(@user_member)
+    '|
+    =< link_to 'Back', user_members_path
+  .box-footer
+    == render 'form'

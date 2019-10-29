@@ -1,0 +1,22 @@
+.box
+  .box-body
+    h1 Listing user_members
+    = link_to 'New Member', new_user_member_path
+  .box-footer
+    table.table.table-striped.table-hover
+      thead
+        tr
+          th Name
+          th Color
+          th Actions
+
+      tbody
+        - @user_members.each do |user_member|
+          tr
+            td = user_member.name
+            td = user_member.color
+            td 
+              = link_to 'Show', user_member_path(user_member), class: "btn btn-success"
+              = link_to 'Edit', edit_user_member_path(user_member), class: "btn btn-primary"
+              = link_to 'Destroy', user_member_path(user_member), data: { confirm: 'Are you sure?' }, method: :delete, class: "btn btn-danger"
+    br

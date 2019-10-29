@@ -1,0 +1,22 @@
+.col-md-8.col-md-offset-2.js-medium-form
+  = form_for [:user, @user_member] do |f|
+    - if @user_member.errors.any?
+      #error_explanation
+        h2 = "#{pluralize(@user_member.errors.count, "error")} prohibited this user_member from being saved:"
+        ul
+          - @user_member.errors.full_messages.each do |message|
+            li = message
+
+    .form-group
+      = f.label :name, class: "control-label" do
+        | Name
+        span.text-danger *
+      = f.text_field :name, class: "form-control"
+
+      = f.label :color, class: "control-label" do
+        | Color
+        span.text-danger *
+      = f.text_field :color, class: "form-control color-picker"
+
+    .form-group
+      = f.submit "Submit", class: "form-control btn btn-primary"
