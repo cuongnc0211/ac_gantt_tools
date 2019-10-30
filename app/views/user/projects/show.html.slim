@@ -1,0 +1,14 @@
+.box
+  .box-body
+    h1 Listing members
+    => link_to 'Edit', edit_user_project_path(@project)
+    '|
+    =< link_to 'Back', user_projects_path
+  .box-footer
+    table.table.table-striped.table-hover
+      tr
+        td Name
+        td = @project.name
+      tr
+        td Description
+        td = @project.description

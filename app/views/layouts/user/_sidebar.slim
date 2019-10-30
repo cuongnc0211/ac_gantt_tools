@@ -21,6 +21,10 @@ aside.main-sidebar
         = link_to user_members_path do
           i.fa.fa-users
           span Members
+      li class="#{content_for :user_project}"
+        = link_to user_projects_path do
+          i.fa.fa-book
+          span Project
       / li class="#{content_for :history_list_activation}"
       /   = link_to user_crawl_histories_path do
       /     span = t(".list_crawl_histories")

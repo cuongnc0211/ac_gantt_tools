@@ -1,0 +1,8 @@
+.box
+  .box-body
+    h1 Editing Project
+    => link_to 'Show', user_project_path(@project)
+    '|
+    =< link_to 'Back', user_projects_path
+  .box-footer
+    == render 'form'

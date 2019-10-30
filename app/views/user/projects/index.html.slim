@@ -1,0 +1,22 @@
+.box
+  .box-body
+    h1 Listing Projects
+    = link_to 'New Project', new_user_project_path
+  .box-footer
+    table.table.table-striped.table-hover
+      thead
+        tr
+          th Name
+          th Color
+          th Actions
+
+      tbody
+        - @projects.each do |project|
+          tr
+            td = project.name
+            td = project.color
+            td 
+              = link_to 'Show', user_project_path(project), class: "btn btn-success"
+              = link_to 'Edit', edit_user_project_path(project), class: "btn btn-primary"
+              = link_to 'Destroy', user_project_path(project), data: { confirm: 'Are you sure?' }, method: :delete, class: "btn btn-danger"
+    br
