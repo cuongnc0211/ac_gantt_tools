@@ -7,14 +7,14 @@
       thead
         tr
           th Name
-          th Color
+          th Description
           th Actions
 
       tbody
         - @projects.each do |project|
           tr
             td = project.name
-            td = project.color
+            td = project.description
             td 
               = link_to 'Show', user_project_path(project), class: "btn btn-success"
               = link_to 'Edit', edit_user_project_path(project), class: "btn btn-primary"

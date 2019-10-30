@@ -1,0 +1,50 @@
+.col-md-8.col-md-offset-2.js-medium-form
+  = form_for [:user, @task] do |f|
+    - if @task.errors.any?
+      #error_explanation
+        h2 = "#{pluralize(@task.errors.count, "error")} prohibited this user_member from being saved:"
+        ul
+          - @task.errors.full_messages.each do |message|
+            li = message
+
+    .form-group
+      = f.label :project_id, class: "control-label" do
+        | Project
+      = f.select :project_id, all_projects.collect {|p| [p.name, p.id]}, {},
+        { class: "form-control" }
+
+    .form-group
+      = f.label :title, class: "control-label" do
+        | Title
+        span.text-danger *
+      = f.text_field :title, class: "form-control"
+    
+    .form-group
+      = f.label :description, class: "control-label" do
+        | Description
+      = f.text_area :description, class: "form-control", "rows": 5
+
+    .form-group
+      = f.label :start_date, class: "control-label" do
+        | start_date
+      = f.text_field :start_date, class: "form-control datepicker task-start-date"
+
+    .form-group
+      = f.label :working_days, class: "control-label" do
+        | working_days
+      = f.text_field :working_days, class: "form-control task-working-day"
+
+    .form-group
+      = f.label :end_date, class: "control-label" do
+        | end_date
+      = f.text_field :end_date, class: "form-control datepicker task-end-date"
+
+    .form-group
+      = f.label :member_id, class: "control-label" do
+        | Assignee
+      = f.select :member_id, all_members.collect {|m| [m.name, m.id]}, { include_blank: true },
+        { class: "form-control" }
+
+
+    .form-group
+      = f.submit "Submit", class: "form-control btn btn-primary"

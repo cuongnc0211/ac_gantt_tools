@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_30_074908) do
+ActiveRecord::Schema.define(version: 2019_10_30_082350) do
 
   create_table "members", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -27,6 +27,23 @@ ActiveRecord::Schema.define(version: 2019_10_30_074908) do
     t.index ["name"], name: "index_projects_on_name"
   end
 
+  create_table "tasks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.integer "working_days"
+    t.bigint "member_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "project_id"
+    t.string "type"
+    t.integer "parent_id"
+    t.index ["member_id"], name: "index_tasks_on_member_id"
+    t.index ["project_id"], name: "index_tasks_on_project_id"
+    t.index ["title"], name: "index_tasks_on_title"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -39,4 +56,5 @@ ActiveRecord::Schema.define(version: 2019_10_30_074908) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "tasks", "members"
 end

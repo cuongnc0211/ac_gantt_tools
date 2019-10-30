@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery.minicolors
+//= require jquery-ui
 //= require bootstrap/dist/js/bootstrap
 //= require admin-lte/dist/js/adminlte.js
 //= require rails-ujs

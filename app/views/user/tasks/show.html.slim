@@ -1,0 +1,29 @@
+.box
+  .box-body
+    h1 Listing projects
+    => link_to 'Edit', edit_user_task_path(@task)
+    '|
+    =< link_to 'Back', user_tasks_path
+  .box-footer
+    table.table.table-striped.table-hover
+      tr
+        td Name
+        td = @task.title
+      tr
+        td Description
+        td = @task.description
+      tr
+        td Start date
+        td = @task.start_date.strftime(Settings.default.date_format)
+      tr
+        td End date
+        td = @task.end_date.strftime(Settings.default.date_format)
+      tr
+        td Project
+        td = @task.project&.name
+      tr
+        td Assignee
+        td = @task.member&.name
+      tr
+        td Type
+        td = @task.type

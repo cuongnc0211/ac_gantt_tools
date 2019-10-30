@@ -24,7 +24,11 @@ aside.main-sidebar
       li class="#{content_for :user_project}"
         = link_to user_projects_path do
           i.fa.fa-book
-          span Project
+          span Projects
+      li class="#{content_for :user_task}"
+        = link_to user_tasks_path do
+          i.fa.fa-tasks
+          span Tasks
       / li class="#{content_for :history_list_activation}"
       /   = link_to user_crawl_histories_path do
       /     span = t(".list_crawl_histories")

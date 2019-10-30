@@ -4,3 +4,6 @@ flash:
   alert: "alert-warning"
   success: "alert-success"
   failed: "alert-danger"
+
+default:
+  date_format: "%d %B, %Y"

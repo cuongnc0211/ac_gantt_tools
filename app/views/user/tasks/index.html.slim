@@ -1,0 +1,32 @@
+.box
+  .box-body
+    h1 Listing Task
+    = link_to 'New Task', new_user_task_path
+  .box-footer
+    table.table.table-striped.table-hover
+      thead
+        tr
+          th Title
+          th Start date
+          th Working days
+          th End date
+          th Project
+          th Assignee
+          th Type
+          th Actions
+
+      tbody
+        - @tasks.each do |task|
+          tr
+            td = task.title
+            td = task.start_date.strftime(Settings.default.date_format)
+            td = task.working_days
+            td = task.end_date.strftime(Settings.default.date_format)
+            td = task.project&.name
+            td = task.member&.name
+            td = task.type
+            td 
+              = link_to 'Show', user_task_path(task), class: "btn btn-success"
+              = link_to 'Edit', edit_user_task_path(task), class: "btn btn-primary"
+              = link_to 'Destroy', user_task_path(task), data: { confirm: 'Are you sure?' }, method: :delete, class: "btn btn-danger"
+    br

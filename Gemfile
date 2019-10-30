@@ -78,3 +78,5 @@ gem 'font-awesome-rails'
 gem 'gretel'
 
 gem 'rails_12factor', group: :production
+
+gem 'jquery-ui-rails'
