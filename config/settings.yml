@@ -6,4 +6,8 @@ flash:
   failed: "alert-danger"
 
 default:
-  date_format: "%d %B, %Y"
+  date_format: 
+    full: "%d %B, %Y"
+    no_year: "%d/%m"
+  
+  task_color: "#ffcc66"

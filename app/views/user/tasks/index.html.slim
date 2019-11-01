@@ -19,9 +19,9 @@
         - @tasks.each do |task|
           tr
             td = task.title
-            td = task.start_date.strftime(Settings.default.date_format)
+            td = task.start_date.strftime(Settings.default.date_format.full)
             td = task.working_days
-            td = task.end_date.strftime(Settings.default.date_format)
+            td = task.end_date.strftime(Settings.default.date_format.full)
             td = task.project&.name
             td = task.member&.name
             td = task.type

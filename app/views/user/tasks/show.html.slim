@@ -14,10 +14,10 @@
         td = @task.description
       tr
         td Start date
-        td = @task.start_date.strftime(Settings.default.date_format)
+        td = @task.start_date.strftime(Settings.default.date_format.full)
       tr
         td End date
-        td = @task.end_date.strftime(Settings.default.date_format)
+        td = @task.end_date.strftime(Settings.default.date_format.full)
       tr
         td Project
         td = @task.project&.name
