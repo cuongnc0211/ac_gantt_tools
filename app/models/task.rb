@@ -31,7 +31,7 @@ class Task < ApplicationRecord
   def target_day_to_do
     return 0 if Date.today > end_date
 
-    days - Task.working_days(start_date, Date.today)
+    working_days - Task.working_days(start_date, Date.today)
   end
 
   def actual_days_to_do
