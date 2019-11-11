@@ -45,6 +45,23 @@
       = f.select :member_id, all_members.collect {|m| [m.name, m.id]}, { include_blank: true },
         { class: "form-control" }
 
+    .form-group
+      - f.object.type ||= params[:type] if params[:type].present?
+      = f.label :type, class: "control-label" do
+        | Type
+      = f.select :type, Task.types.map {|m| [m, m]}, {}, { class: "form-control" }
+
+    .form-group
+      - f.object.parent_id ||= params[:parent_id] if params[:parent_id].present?
+      = f.label :parent_id, class: "control-label" do
+        | Parent Task
+      = f.select :parent_id, f.object.possible_parent_tasks.map{|t| [t.title, t.id]}, {}, { class: "form-control" }
+    
+    .form-group
+      = f.label :status, class: "control-label" do
+        | Status
+      = f.select :status, Task.statuses.keys.map {|m| [m, m]}, {}, { class: "form-control" }
+
 
     .form-group
       = f.submit "Submit", class: "form-control btn btn-primary"

@@ -13,6 +13,17 @@ class Task < ApplicationRecord
     %w[Task SubTask Activity]
   end
 
+  def possible_parent_tasks
+    case self.type
+    when "Task"
+      return []
+    when "SubTask"
+     Task.all
+    when "Activity"
+      SubTask.all
+    end
+  end
+
   def include_date?(date)
     (start_date..(end_date + 1.day)).cover? date
   end

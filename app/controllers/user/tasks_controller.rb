@@ -1,10 +1,9 @@
 class User::TasksController < User::BaseController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
-
   # GET /user/tasks
   # GET /user/tasks.json
   def index
-    @tasks = Task.all
+    @projects = Project.all.includes(tasks: [:member, sub_tasks: [:member, activities: :member]])
   end
 
   # GET /user/tasks/1
@@ -62,14 +61,15 @@ class User::TasksController < User::BaseController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_task
-      @task = Task.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def task_params
-      params.require(:task).permit(:title, :description, :start_date, :end_date, :working_days,
-        :project_id, :type, :parent_id, :member_id)
-    end
+  def set_task
+    @task = Task.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def task_params
+    params.require(:task).permit(:title, :description, :start_date, :end_date,
+      :working_days, :project_id, :type, :parent_id, :member_id, :type,
+      :parent_id, :actual_progress, :status, :finished_date)
+  end
 end

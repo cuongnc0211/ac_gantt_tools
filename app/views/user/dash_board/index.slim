@@ -1,7 +1,7 @@
 - breadcrumb :root
 
 .dashboard_container
-  table.table.table-striped.table-bordered#info
+  table.table.table-bordered#info
     tr.tr-month
       td
     - @projects.each do |project|
@@ -10,25 +10,26 @@
           b = project.name
       - project.tasks.each do |task|
         tr.tr-task
-          td 
+          td
             span = task.title
         - task.sub_tasks.each do |sub_task|
           tr.tr-sub-task
             td.sub-task 
-              span &emsp = sub_task.title
+              span.title-subtask
+                = "#{sub_task.title}"
           - sub_task.activities.each do |activity|
             tr.tr-activity
-              td 
-                span &emsp = activity.title
+              td
+                span.title-activity
+                  = "#{activity.title}"
 
-
-  table.table.table-striped.table-bordered#details
+  table.table.table-bordered#details
     tr.tr-months
-      td colspan="5"
+      td.target colspan="5"
         | Target
-      td colspan="4"
+      td.actual colspan="4"
         | Actual
-      td
+      td.actual
 
       - current_month = Date.today.beginning_of_quarter
       - (0..2).to_a.each do |n|
@@ -41,11 +42,14 @@
     - @projects.each do |project|
       = render "days_bar"
       - project.tasks.each do |task|
-        = render "task_progress_bar", task: task
+        tr.tr-task class="task-#{task.id}"
+          = render "task_progress_bar", task: task, start_date: @start_date, end_date: @end_date
 
         - task.sub_tasks.each do |sub_task|
-          = render "task_progress_bar", task: sub_task
+          tr.tr-sub-task class="task-#{sub_task.id}"
+            = render "task_progress_bar", task: sub_task, start_date: @start_date, end_date: @end_date
 
           - sub_task.activities.each do |activity|
-            = render "task_progress_bar", task: activity
+            tr.tr-activity class="task-#{activity.id}"
+              = render "task_progress_bar", task: activity, start_date: @start_date, end_date: @end_date
     

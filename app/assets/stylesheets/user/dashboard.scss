@@ -8,7 +8,15 @@
   height: 60px;
 }
 
-.tr-dates {
+td.target {
+  background-color: lightsteelblue !important;
+}
+
+td.actual {
+  background-color: aquamarine !important;
+}
+
+.td-date {
   background-color: aquamarine;
   height: 60px;
 }
@@ -31,7 +39,7 @@
 
   td, th {
     width: 70px;
-    height: 40px;
+    height: 39px;
     text-align: left;
   }
 }
@@ -47,36 +55,6 @@
 
   .tooltip-inner {
     white-space: pre-wrap;
-  }
-  .reservation {
-    position: relative;
-    border-color: white;
-    .info {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      width: 100%;
-      display: block;
-      color: white;
-      font-weight: bold;
-    }
-    .tooltiptext {
-      visibility: hidden;
-      background-color: white;
-      color: black;
-      text-align: center;
-      border-radius: 6px;
-      padding: 5px 10px;
-      position: fixed;
-      z-index: 99;
-      top: 50px;
-      left: 50%;
-      width: max-content;
-      border: solid 1px #bbbaba;
-      p {
-        text-align: left;
-      }
-    }
   }
 
   td, th {
@@ -97,22 +75,27 @@ td.header-project {
 }
 
 .tr-task {
+  background-color: #ffbb33;
   .td {
-    padding-left: 5px;
-    text-align: left !important;
+    span {
+      padding-left: 5px;
+      text-align: left !important;
+    }
   }
 }
 
 .tr-sub-task {
-  .td {
+  background-color: #ffdd99;
+  .title-subtask {
     padding-left: 10px;
     text-align: left !important;
   }
 }
 
 .tr-activity {
-  .td {
-    padding-left: 15px;
+  background-color:  #ffeecc;
+  .title-activity {
+    padding-left: 20px;
     text-align: left !important;
   }
 }

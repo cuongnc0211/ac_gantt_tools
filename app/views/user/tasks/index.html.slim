@@ -3,30 +3,59 @@
     h1 Listing Task
     = link_to 'New Task', new_user_task_path
   .box-footer
-    table.table.table-striped.table-hover
-      thead
-        tr
-          th Title
-          th Start date
-          th Working days
-          th End date
-          th Project
-          th Assignee
-          th Type
-          th Actions
-
-      tbody
-        - @tasks.each do |task|
+    - @projects.each do |project|
+      h4 
+        = "Project #{ project.name }"
+      table.table.table-hover.index_tasks
+        thead
           tr
-            td = task.title
-            td = task.start_date.strftime(Settings.default.date_format.full)
-            td = task.working_days
-            td = task.end_date.strftime(Settings.default.date_format.full)
-            td = task.project&.name
-            td = task.member&.name
-            td = task.type
-            td 
-              = link_to 'Show', user_task_path(task), class: "btn btn-success"
-              = link_to 'Edit', edit_user_task_path(task), class: "btn btn-primary"
-              = link_to 'Destroy', user_task_path(task), data: { confirm: 'Are you sure?' }, method: :delete, class: "btn btn-danger"
-    br
+            th Title
+            th Start date
+            th Working days
+            th End date
+            th Assignee
+            th Actions
+
+        tbody
+          - project.tasks.each do |task|
+            tr.tasks
+              td.title = task.title
+              td = task.start_date.strftime(Settings.default.date_format.full)
+              td = task.working_days
+              td = task.end_date.strftime(Settings.default.date_format.full)
+              td = task.member&.name
+              td 
+                = link_to 'Create Subtask', new_user_task_path(task, type: :SubTask, parent_id: task.id), class: "btn btn-primary"
+                = link_to 'Show', user_task_path(task), class: "btn btn-success"
+                = link_to 'Edit', edit_user_task_path(task), class: "btn btn-primary"
+                = link_to 'Destroy', user_task_path(task), data: { confirm: 'Are you sure?' }, method: :delete, class: "btn btn-danger"
+            
+            - task.sub_tasks.each do |sub_task|
+              tr.sub_tasks
+                td.title
+                  span -- 
+                  span = sub_task.title
+                td = sub_task.start_date.strftime(Settings.default.date_format.full)
+                td = sub_task.working_days
+                td = sub_task.end_date.strftime(Settings.default.date_format.full)
+                td = sub_task.member&.name
+                td 
+                  = link_to 'Create Activity', new_user_task_path(sub_task, type: :Activity, parent_id: sub_task.id), class: "btn btn-primary"
+                  = link_to 'Show', user_task_path(sub_task), class: "btn btn-success"
+                  = link_to 'Edit', edit_user_task_path(sub_task), class: "btn btn-primary"
+                  = link_to 'Destroy', user_task_path(sub_task), data: { confirm: 'Are you sure?' }, method: :delete, class: "btn btn-danger"
+
+              - sub_task.activities.each do |activity|
+                tr.activities
+                  td.title
+                    span --- 
+                    span = activity.title
+                  td = activity.start_date.strftime(Settings.default.date_format.full)
+                  td = activity.working_days
+                  td = activity.end_date.strftime(Settings.default.date_format.full)
+                  td = activity.member&.name
+                  td 
+                    = link_to 'Show', user_task_path(activity), class: "btn btn-success"
+                    = link_to 'Edit', edit_user_task_path(activity), class: "btn btn-primary"
+                    = link_to 'Destroy', user_task_path(activity), data: { confirm: 'Are you sure?' }, method: :delete, class: "btn btn-danger"
+      br

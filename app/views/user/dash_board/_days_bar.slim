@@ -1,17 +1,17 @@
-tr.tr-dates
-  td.header-project Start
-  td.header-project Days
-  td.header-project End
-  td.header-project Target Prg
-  td.header-project Days-to-do
-  td.header-project Actual Prg
-  td.header-project Working days
-  td.header-project Days-to-do
-  td.header-project Finish date
-  td.header-project Status
+tr
+  td.header-project.target Start
+  td.header-project.target Days
+  td.header-project.target End
+  td.header-project.target Target Prg
+  td.header-project.target Days-to-do
+  td.header-project.actual Actual Prg
+  td.header-project.actual Working days
+  td.header-project.actual Days-to-do
+  td.header-project.actual Finish date
+  td.header-project.actual Status
 
   - @start_date.upto(@end_date) do |d|
-    td class="#{ weekend_class d }"
+    td class="td-date #{ weekend_class d }"
       span = d.day
       br
       span = d.strftime("%a")
