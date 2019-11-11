@@ -10,8 +10,8 @@ td.tr-stattistic
 td.tr-stattistic
     = task.target_day_to_do
 td.tr-stattistic
-  = form_for task, url: user_task_path(task), remote: true, html: {class: "intable-form"} do |f|
-    = f.number_field :actual_progress
+  = form_for task, url: user_task_path(task), name: :task, remote: true, html: {class: "intable-form"} do |f|
+    = f.number_field :actual_progress, "min": 0, "max": 100
     = f.submit "submit", class: "hide intable-form-submit"
 td.tr-stattistic
   = task.actual_worked_days
@@ -20,8 +20,8 @@ td.tr-stattistic
 td.tr-stattistic
   = task.actual_finished_date.strftime(Settings.default.date_format.no_year)
 td.tr-stattistic
-  = form_for task, url: user_task_path(task), remote: true, html: {class: "intable-form"} do |f|
-    = f.select :actual_progress, Task.statuses.keys.map {|k| [k.humanize, k]}
+  = form_for task, url: user_task_path(task), name: :task, remote: true, html: {class: "intable-form"} do |f|
+    = f.select :status, Task.statuses.keys.map {|k| [k.humanize, k]}
     = f.submit "submit", class: "hide intable-form-submit"
 
 - @start_date.upto(@end_date) do |d|

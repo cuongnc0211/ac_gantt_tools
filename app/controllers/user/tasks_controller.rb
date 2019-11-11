@@ -45,12 +45,11 @@ class User::TasksController < User::BaseController
       if @task.update(task_params)
         format.html { redirect_to user_task_path(@task), notice: 'Task was successfully updated.' }
         format.json { render :show, status: :ok, location: @task }
-        format.js {render layout: false}
       else
         format.html { render :edit }
         format.json { render json: @task.errors, status: :unprocessable_entity }
-        format.js {render layout: false}
       end
+      format.js {render layout: false}
     end
   end
 
@@ -72,7 +71,12 @@ class User::TasksController < User::BaseController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def task_params
-    params.require(:task).permit(:title, :description, :start_date, :end_date,
+    name = nil
+    [:task, :sub_task, :activity].each do |t|
+      name = t if params.dig(t).present?
+    end
+
+    params.require(name.to_sym).permit(:title, :description, :start_date, :end_date,
       :working_days, :project_id, :type, :parent_id, :member_id, :type,
       :parent_id, :actual_progress, :status, :finished_date)
   end
