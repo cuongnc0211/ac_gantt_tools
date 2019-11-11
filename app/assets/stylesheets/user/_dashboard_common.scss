@@ -1,0 +1,19 @@
+table.tbl {
+  td {
+    border: 1px solid whitesmoke;
+    padding: 5px;
+    height: 30px;
+    min-width: 20px;
+  }
+
+  td.header-project {
+    height: 65px;
+    font-size: 16px;
+  }
+
+  input {
+    border: 0px;
+    height: 20px;
+    padding: 0px;
+  }
+}

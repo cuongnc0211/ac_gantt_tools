@@ -39,13 +39,17 @@ class User::TasksController < User::BaseController
   # PATCH/PUT /user/tasks/1
   # PATCH/PUT /user/tasks/1.json
   def update
+    @start_date = Date.today.beginning_of_quarter
+    @end_date = Date.today.end_of_quarter
     respond_to do |format|
       if @task.update(task_params)
         format.html { redirect_to user_task_path(@task), notice: 'Task was successfully updated.' }
         format.json { render :show, status: :ok, location: @task }
+        format.js {render layout: false}
       else
         format.html { render :edit }
         format.json { render json: @task.errors, status: :unprocessable_entity }
+        format.js {render layout: false}
       end
     end
   end

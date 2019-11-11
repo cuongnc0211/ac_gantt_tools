@@ -1,9 +1,10 @@
 - breadcrumb :root
 
 .dashboard_container
-  table.table.table-bordered#info
+  table.tbl#info
     tr.tr-month
       td
+        | Projects/Tasks
     - @projects.each do |project|
       tr.tr-project-name
         td.header-project
@@ -23,7 +24,7 @@
                 span.title-activity
                   = "#{activity.title}"
 
-  table.table.table-bordered#details
+  table.tbl#details
     tr.tr-months
       td.target colspan="5"
         | Target
@@ -46,10 +47,10 @@
           = render "task_progress_bar", task: task, start_date: @start_date, end_date: @end_date
 
         - task.sub_tasks.each do |sub_task|
-          tr.tr-sub-task class="task-#{sub_task.id}"
+          tr.tr-subtask class="task-#{sub_task.id}"
             = render "task_progress_bar", task: sub_task, start_date: @start_date, end_date: @end_date
 
           - sub_task.activities.each do |activity|
-            tr.tr-activity class="task-#{activity.id}"
+            tr.tr- class="task-#{activity.id}"
               = render "task_progress_bar", task: activity, start_date: @start_date, end_date: @end_date
     
