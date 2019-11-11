@@ -51,6 +51,8 @@ class Task < ApplicationRecord
     worked_days = Task.working_days(start_date, Date.today)
     avg_v = actual_progress / worked_days
     100 / avg_v - worked_days
+  rescue StandardError
+    return 0
   end
 
   def actual_finished_date
