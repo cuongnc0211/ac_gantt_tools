@@ -7,6 +7,7 @@ $(document).on('turbolinks:load', function() {
     $(this).closest("form").find(".intable-form-submit").click();
   });
 
+  //trigger popover by hover anf delay 300ms
   $('[data-toggle="popover"]').popover({
     trigger: 'manual',
     html: true,
@@ -27,4 +28,24 @@ $(document).on('turbolinks:load', function() {
       }
     }, 300);
   });
+
+  // $('[data-toggle="popover"]').popover({ trigger: "click" });
+  // $(document).on("click", "[data-toggle='popover']", function(e){
+  //   var template = $(this).data("content");
+
+  //   $(this).popover({
+  //     html: true,
+  //     content: template,
+  //   });
+  // });
+
+  // $('body').on('click', function (e) {
+  //   $('[data-toggle="popover"]').each(function () {
+  //     //the 'is' for buttons that trigger popups
+  //     //the 'has' for icons within a button that triggers a popup
+  //     if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+  //         $(this).popover('hide');
+  //     }
+  //   });
+  // });
 });

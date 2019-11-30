@@ -1,9 +1,10 @@
-.box.task-popover
+
   .box-header.with-border
-    h4 Header
+    h4 = "note #{day.strftime(Settings.default.date_format.full)}"
     .box-tools.pull-right
       button.close.js-popover-close[type="button" aria-label="Close"]
         span[aria-hidden="true"]
           | ×
   .box-body
-    p body
+    - task_note = task.task_notes.find_or_initialize_by date: day
+    p = task_note.content || "No content yet!"

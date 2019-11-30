@@ -18,6 +18,10 @@ td.actual {
 
 .td-date {
   background-color: aquamarine;
+  // font-size: 12px;
+  // min-width: 25px !important;
+  padding: 2px !important;
+  min-width: 30px !important;
   // height: 60px;
 }
 
@@ -111,4 +115,11 @@ td.header-project {
   select {
     max-width: 100px;
   }
+}
+
+.tr-task-day {
+  img {
+    cursor: pointer;
+  }
+  padding: 0px !important;
 }
