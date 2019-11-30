@@ -53,4 +53,4 @@
           - sub_task.activities.each do |activity|
             tr.tr- class="task-#{activity.id}"
               = render "task_progress_bar", task: activity, start_date: @start_date, end_date: @end_date
-    
+= render "task_note_modal"

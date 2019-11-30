@@ -1,0 +1,18 @@
+#task-note-modal.modal[tabindex="-1" role="dialog" aria-labelledby="modalLabelLarge" aria-hidden="true" data-task-id]
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close[type="button" data-dismiss="modal" aria-label="Close"]
+          span[aria-hidden="true"]
+            | ×
+        h4#modalLabelLarge.modal-title
+          | Task Note
+      = form_for [:user, TaskNote.new] do |f|
+        .modal-body
+          .form-group
+            = f.text_area :content, class: "form-control", rows: 5
+        .modal-footer
+          button.btn.btn-primary.pull-left.journey-finish-btn[type="button"]
+            = t("common.buttons.save")
+          button.btn.btn-danger.pull-right.btn-cs-cancel-finish[type="button" data-dismiss="modal"]
+            = t("common.buttons.cancel")

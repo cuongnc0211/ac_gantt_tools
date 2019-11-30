@@ -19,7 +19,7 @@ $(document).on('turbolinks:load', function() {
     $(this).popover('show');
     $('.popover').on('mouseleave', function () {
       $(_this).popover('hide');
-    });
+    }, 500);
   }).on('mouseleave', function () {
     var _this = this;
     setTimeout(function () {
@@ -48,4 +48,10 @@ $(document).on('turbolinks:load', function() {
   //     }
   //   });
   // });
+
+  $(document).on("click", ".modify_task_note", function(e){
+    e.preventDefault();
+    $(".popover").popover('hide');
+    $("#task-note-modal").modal("show");
+  });
 });
