@@ -28,7 +28,7 @@ td.tr-stattistic
   - if task.marking? d
     - color = task.member_color.presence || Settings.default.task_color
     td class="tr-task-day" style="background-color: #{ color }"
-      <a class="js-task-day-note"></a>
+      <div class="js-task-day-note" style="width: 100%; height: 100%" data-placement="top" data-trigger="focus" data-toggle="popover" title="Popover title" data-content="And here's some amazing content."></div>
   - else
     td class="tr-task-day #{ weekend_class d }"
-      <a class="js-task-day-note"></a>
+      <div class="js-task-day-note" style="width: 100%; height: 100%" data-placement="top" data-trigger="focus" data-toggle="popover" title="Popover title" data-content="And here's some amazing content."></div>

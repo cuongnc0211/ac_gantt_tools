@@ -4,6 +4,7 @@ class Task < ApplicationRecord
   belongs_to :project
   belongs_to :member
   has_many :sub_tasks, class_name: 'SubTask', foreign_key: 'parent_id'
+  has_many :task_notes
 
   delegate :color, to: :member, prefix: true, allow_nil: true
 
