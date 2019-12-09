@@ -52,6 +52,24 @@ $(document).on('turbolinks:load', function() {
   $(document).on("click", ".modify_task_note", function(e){
     e.preventDefault();
     $(".popover").popover('hide');
+
+    var form = $("#task-note-modal").find("form");
+    var note_content = $(this).closest(".day_popover").find(".box-body").text();
+    var token = $("meta[name='csrf-token']").attr('content');
+    console.log(token);
+    form.find("input[name='authenticity_token']").val(token);
+    form.find("#task_note_content").val("");
+
+    if(note_content != "No note yet!") {
+      // form.attr("method", "PUT");
+      form.attr( "action", "user/task_notes/" + $(this).parent().find(".task_id").text() )
+      form.find("#task_note_content").val(note_content);
+    }
+    form.find(".note_date_field").val( $(this).parent().find(".date_note").text() )
+    form.find(".note_task_id").val( $(this).parent().find(".task_id").text() )
+    
+    console.log( $(this).parent().find(".date_note").text() )
+    console.log( $(this).parent().find(".task_id").text() )
     $("#task-note-modal").modal("show");
   });
 });

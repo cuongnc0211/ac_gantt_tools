@@ -7,12 +7,16 @@
             | ×
         h4#modalLabelLarge.modal-title
           | Task Note
-      = form_for [:user, TaskNote.new] do |f|
+      = form_for [:user, TaskNote.new], remote: true do |f|
         .modal-body
           .form-group
             = f.text_area :content, class: "form-control", rows: 5
+
+            = f.hidden_field :date, class: "note_date_field"
+            = f.hidden_field :task_id, class: "note_task_id"
+            = hidden_field_tag "_METHOD", "PUT"
         .modal-footer
-          button.btn.btn-primary.pull-left.journey-finish-btn[type="button"]
-            = t("common.buttons.save")
+          = f.submit "Save", class: "btn btn-primary pull-left journey-finish-btn"
+
           button.btn.btn-danger.pull-right.btn-cs-cancel-finish[type="button" data-dismiss="modal"]
             = t("common.buttons.cancel")

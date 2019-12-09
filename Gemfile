@@ -80,3 +80,7 @@ gem 'gretel'
 gem 'rails_12factor', group: :production
 
 gem 'jquery-ui-rails'
+
+gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
+
+gem 'pry', '~> 0.12.2'

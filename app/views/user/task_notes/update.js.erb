@@ -1,1 +1,3 @@
-$(".task_<%= @task.id %>_note_<%= @task_note.date.strftime('%d_%m') %>").html("<%= j render "task_day_item", day: Date.new(@task_note.date), task: @task %>")
+<% date = @task_note.date %>
+$(".<%= task_day_unq_class @task, date %>").html("<%= j render "user/dash_board/task_day_item", day: date, task: @task %>")
+$("#task-note-modal").modal("hide");

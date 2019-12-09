@@ -3,7 +3,6 @@ class User::TaskNotesController < User::BaseController
     @task_note = TaskNote.create task_note_params
     @task = @task_note.task
     respond_to do |format|
-      format.html
       format.js { render layout: false }
     end
   end
@@ -14,7 +13,6 @@ class User::TaskNotesController < User::BaseController
     @task_note.update_attributes task_note_params
 
     respond_to do |format|
-      format.html
       format.js { render layout: false }
     end
   end

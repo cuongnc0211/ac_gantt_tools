@@ -25,11 +25,11 @@ td.tr-stattistic
     = f.submit "submit", class: "hide intable-form-submit"
 
 - @start_date.upto(@end_date) do |d|
-  - if task.marking? day
+  - if task.marking? d
     - color = task.member_color.presence || Settings.default.task_color
-    td class="tr-task-day task_#{task.id}_note_#{d.strftime('%d_%m')}" style="background-color: #{ color }"
+    td class="tr-task-day #{task_day_unq_class task, d}" style="background-color: #{ color }"
       = render "task_day_item", day: d, task: task
 
   - else
-    td class="tr-task-day task_#{task.id}_note_#{d.strftime('%d_%m')} #{ weekend_class day }"
+    td class="tr-task-day #{task_day_unq_class task, d} #{ weekend_class d }"
       = render "task_day_item", day: d, task: task
