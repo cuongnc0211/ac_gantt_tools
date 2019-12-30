@@ -1,6 +1,9 @@
 class User::DashBoardController < User::BaseController
   def index
     @projects = Project.all.includes(tasks: [:member, sub_tasks: [:member, activities: :member]])
+    gon.push({
+      projects: @projects
+    })
   end
 
   private

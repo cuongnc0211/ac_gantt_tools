@@ -6,28 +6,47 @@ $(document).on('turbolinks:load', function() {
   $(document).on("change", ".intable-form select", function(){
     $(this).closest("form").find(".intable-form-submit").click();
   });
+  
+  //handle merge pregress cells
+  $('.task-row').each(function(){
+    var task_id = $(this).data('task-id')
 
-  //trigger popover by hover anf delay 300ms
-  $('[data-toggle="popover"]').popover({
-    trigger: 'manual',
-    html: true,
-    animation: false
-  })
-  .on('mouseenter', function () {
-    var _this = this;
-    $('.popover').popover('hide')
-    $(this).popover('show');
-    $('.popover').on('mouseleave', function () {
-      $(_this).popover('hide');
-    }, 500);
-  }).on('mouseleave', function () {
-    var _this = this;
-    setTimeout(function () {
-      if (!$('.popover:hover').length) {
-        $(_this).popover('hide');
+    $(`.task-${task_id} .task_${task_id}_progess_dates`).each(function(index){
+      debugger;
+      if(index == 0) {
+        $(this).attr('colspan', $(`.task-${task_id} .task_${task_id}_progess_dates`).length);
+      } else {
+        $(this).remove();
       }
-    }, 300);
+    });
   });
+
+  // hande click on task_progess_dates
+  $(document).on('click', '.task_progess_dates a img', function(){
+    alert('iu emmm');
+  });
+
+  // //trigger popover by hover anf delay 300ms
+  // $('[data-toggle="popover"]').popover({
+  //   trigger: 'manual',
+  //   html: true,
+  //   animation: false
+  // })
+  // .on('mouseenter', function () {
+  //   var _this = this;
+  //   $('.popover').popover('hide')
+  //   $(this).popover('show');
+  //   $('.popover').on('mouseleave', function () {
+  //     $(_this).popover('hide');
+  //   }, 500);
+  // }).on('mouseleave', function () {
+  //   var _this = this;
+  //   setTimeout(function () {
+  //     if (!$('.popover:hover').length) {
+  //       $(_this).popover('hide');
+  //     }
+  //   }, 300);
+  // });
 
   // $('[data-toggle="popover"]').popover({ trigger: "click" });
   // $(document).on("click", "[data-toggle='popover']", function(e){

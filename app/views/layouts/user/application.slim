@@ -12,6 +12,8 @@ html
     
     = stylesheet_link_tag "http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css"
 
+    = Gon::Base.render_data
+
   body.skin-blue.sidebar-mini
     .wrapper
       = render "layouts/user/header"

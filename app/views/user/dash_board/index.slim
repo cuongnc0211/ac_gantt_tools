@@ -43,14 +43,14 @@
     - @projects.each do |project|
       = render "days_bar"
       - project.tasks.each do |task|
-        tr.tr-task class="task-#{task.id}"
+        tr.tr-task class="task-row task-#{task.id}" data-task-id="#{ task.id }"
           = render "task_progress_bar", task: task, start_date: @start_date, end_date: @end_date
 
         - task.sub_tasks.each do |sub_task|
-          tr.tr-subtask class="task-#{sub_task.id}"
+          tr.tr-sub-task class="task-row task-#{sub_task.id}" data-task-id="#{ sub_task.id }"
             = render "task_progress_bar", task: sub_task, start_date: @start_date, end_date: @end_date
 
           - sub_task.activities.each do |activity|
-            tr.tr- class="task-#{activity.id}"
+            tr.tr-activity class="task-row task-#{activity.id}" data-task-id="#{ activity.id }"
               = render "task_progress_bar", task: activity, start_date: @start_date, end_date: @end_date
 = render "task_note_modal"

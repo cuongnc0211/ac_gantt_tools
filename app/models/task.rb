@@ -30,7 +30,7 @@ class Task < ApplicationRecord
   end
 
   def marking?(date)
-    include_date?(date) && !(date.saturday? || date.sunday?)
+    include_date?(date)
   end
 
   def target_progress
@@ -65,6 +65,16 @@ class Task < ApplicationRecord
 
     Task.working_days(start_date, Date.today)
   end
+
+  # ===========================================================================
+  # view method
+
+  def class_to_merge(date)
+    if include_date?(date)
+      return ""
+    end
+  end
+
 
   # ===========================================================================
 
