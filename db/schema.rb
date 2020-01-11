@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_26_145051) do
+ActiveRecord::Schema.define(version: 2019_12_30_034431) do
 
   create_table "members", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 2019_11_26_145051) do
     t.integer "actual_progress", default: 0
     t.integer "status", default: 0
     t.date "finished_date"
+    t.text "note"
     t.index ["member_id"], name: "index_tasks_on_member_id"
     t.index ["project_id"], name: "index_tasks_on_project_id"
     t.index ["title"], name: "index_tasks_on_title"

@@ -33,6 +33,7 @@ class User::TasksController < User::BaseController
         format.html { render :new }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
+      format.js {render layout: false}
     end
   end
 
@@ -63,6 +64,14 @@ class User::TasksController < User::BaseController
     end
   end
 
+  def modal_task_detail
+    @task = Task.find(params[:id])
+
+    respond_to do |format|
+      format.js {render layout: false}
+    end
+  end
+
   private
 
   def set_task
@@ -78,6 +87,6 @@ class User::TasksController < User::BaseController
 
     params.require(name.to_sym).permit(:title, :description, :start_date, :end_date,
       :working_days, :project_id, :type, :parent_id, :member_id, :type,
-      :parent_id, :actual_progress, :status, :finished_date)
+      :parent_id, :actual_progress, :status, :finished_date, :note)
   end
 end

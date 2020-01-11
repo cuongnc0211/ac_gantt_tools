@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   namespace :user do
     resources :members
     resources :projects
-    resources :tasks
+    resources :tasks do
+      member do
+        get :modal_task_detail
+      end
+    end
     resources :task_notes, only: [:create, :update]
   end
   devise_for :users

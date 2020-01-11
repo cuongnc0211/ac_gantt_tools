@@ -12,7 +12,6 @@ $(document).on('turbolinks:load', function() {
     var task_id = $(this).data('task-id')
 
     $(`.task-${task_id} .task_${task_id}_progess_dates`).each(function(index){
-      debugger;
       if(index == 0) {
         $(this).attr('colspan', $(`.task-${task_id} .task_${task_id}_progess_dates`).length);
       } else {
@@ -22,73 +21,29 @@ $(document).on('turbolinks:load', function() {
   });
 
   // hande click on task_progess_dates
-  $(document).on('click', '.task_progess_dates a img', function(){
-    alert('iu emmm');
-  });
-
-  // //trigger popover by hover anf delay 300ms
-  // $('[data-toggle="popover"]').popover({
-  //   trigger: 'manual',
-  //   html: true,
-  //   animation: false
-  // })
-  // .on('mouseenter', function () {
-  //   var _this = this;
-  //   $('.popover').popover('hide')
-  //   $(this).popover('show');
-  //   $('.popover').on('mouseleave', function () {
-  //     $(_this).popover('hide');
-  //   }, 500);
-  // }).on('mouseleave', function () {
-  //   var _this = this;
-  //   setTimeout(function () {
-  //     if (!$('.popover:hover').length) {
-  //       $(_this).popover('hide');
-  //     }
-  //   }, 300);
-  // });
-
-  // $('[data-toggle="popover"]').popover({ trigger: "click" });
-  // $(document).on("click", "[data-toggle='popover']", function(e){
-  //   var template = $(this).data("content");
-
-  //   $(this).popover({
-  //     html: true,
-  //     content: template,
-  //   });
-  // });
-
-  // $('body').on('click', function (e) {
-  //   $('[data-toggle="popover"]').each(function () {
-  //     //the 'is' for buttons that trigger popups
-  //     //the 'has' for icons within a button that triggers a popup
-  //     if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
-  //         $(this).popover('hide');
-  //     }
-  //   });
-  // });
-
-  $(document).on("click", ".modify_task_note", function(e){
+  $(document).on('click', '.task_progess_dates a', function(e){
     e.preventDefault();
-    $(".popover").popover('hide');
 
-    var form = $("#task-note-modal").find("form");
-    var note_content = $(this).closest(".day_popover").find(".box-body").text();
+    var form = $("#task-detail-modal").find("form");
     var token = $("meta[name='csrf-token']").attr('content');
-    console.log(token);
     form.find("input[name='authenticity_token']").val(token);
-    form.find("#task_note_content").val("");
 
-    if(note_content != "No note yet!") {
-      // form.attr("method", "PUT");
-      form.attr( "action", "user/task_notes/" + $(this).parent().find(".task_id").text() )
-      form.find("#task_note_content").val(note_content);
-    }
-    form.find(".note_date_field").val( $(this).parent().find(".date_note").text() )
-    form.find(".note_task_id").val( $(this).parent().find(".task_id").text() )
-    
-    console.log( $(this).parent().find(".date_note").text() )
-    console.log( $(this).parent().find(".task_id").text() )
-    $("#task-note-modal").modal("show");
+    var task_id = $(this).closest("tr").data("task-id")
+    $.ajax({
+      async : true,
+      type : "GET",
+      url : `/user/tasks/${task_id}/modal_task_detail`
+    }).done(function() {
+      $('.datepicker').datepicker({
+        autoclose: true,
+        dateFormat: "dd MM, yy",
+        todayBtn: true,
+        todayHighlight: true,
+        changeMonth: true,
+        changeYear: true
+      });
+    });
+
+    $("#task-detail-modal").modal("show");
   });
 });
