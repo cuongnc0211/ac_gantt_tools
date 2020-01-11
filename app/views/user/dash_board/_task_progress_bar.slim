@@ -1,4 +1,3 @@
-
 td.tr-stattistic
   = task.start_date.strftime(Settings.default.date_format.no_year)
 td.tr-stattistic
@@ -29,8 +28,8 @@ td.tr-stattistic
   - if task.marking? d
     - color = task.member_color.presence || Settings.default.task_color
     td class="tr-task-day task_progess_dates #{progess_dates_class} #{task_day_unq_class task, d}" style="background-color: #{ color }"
-      = render "task_day_item", day: d, task: task
+      = render "user/dash_board/task_day_item", day: d, task: task
 
   - else
     td class="tr-task-day #{progess_dates_class} #{task_day_unq_class task, d} #{ weekend_class d }"
-      = render "task_day_item", day: d, task: task
+      = render "user/dash_board/task_day_item", day: d, task: task

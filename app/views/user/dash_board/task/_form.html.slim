@@ -1,0 +1,76 @@
+= form_for [:user, task], url: user_task_path(task), remote: true do |f|
+  - if task.errors.any?
+    #error_explaination
+      h2 = "#{pluralize(task.errors.count, "error")} prohibited this user_member from being saved:"
+      ul
+        - task.errors.full_messages.each do |message|
+          li = message
+
+  .col-md-6
+    .form-group
+      = f.label :project_id, class: "control-label" do
+        | Project
+      = f.select :project_id, all_projects.collect {|p| [p.name, p.id]}, {},
+        { class: "form-control" }
+  
+  .col-md-6
+    .form-group
+      = f.label :title, class: "control-label" do
+        | Title
+        span.text-danger *
+      = f.text_field :title, class: "form-control"
+  
+  .col-md-6
+    .form-group
+      = f.label :start_date, class: "control-label" do
+        | start_date
+      = f.text_field :start_date, class: "form-control datepicker task-start-date"
+  
+  .col-md-6
+    .form-group
+      = f.label :working_days, class: "control-label" do
+        | working_days
+      = f.text_field :working_days, class: "form-control task-working-day"
+  
+  .col-md-6
+    .form-group
+      = f.label :end_date, class: "control-label" do
+        | end_date
+      = f.text_field :end_date, class: "form-control datepicker task-end-date"
+
+  .col-md-6
+    .form-group
+      = f.label :member_id, class: "control-label" do
+        | Assignee
+      = f.select :member_id, all_members.collect {|m| [m.name, m.id]}, { include_blank: true },
+        { class: "form-control" }
+
+  .col-md-6
+    .form-group
+      - f.object.type ||= params[:type] if params[:type].present?
+      = f.label :type, class: "control-label" do
+        | Type
+      = f.select :type, Task.types.map {|m| [m, m]}, {}, { class: "form-control" }
+  
+  .col-md-6
+    .form-group
+      - f.object.parent_id ||= params[:parent_id] if params[:parent_id].present?
+      = f.label :parent_id, class: "control-label" do
+        | Parent Task
+      = f.select :parent_id, f.object.possible_parent_tasks.map{|t| [t.title, t.id]}, {}, { class: "form-control" }
+        
+  .col-md-6
+    .form-group
+      = f.label :status, class: "control-label" do
+        | Status
+      = f.select :status, Task.statuses.keys.map {|m| [m, m]}, {}, { class: "form-control" }
+
+  .col-md-12
+      .form-group
+        = f.label :note, class: "control-label" do
+          | Note
+        = f.text_area :note, class: "form-control", "rows": 10
+
+  .col-md-12
+    .form-group
+      = f.submit "Submit", class: "form-control btn btn-primary"

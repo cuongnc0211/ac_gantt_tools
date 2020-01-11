@@ -10,14 +10,7 @@ $(document).on('turbolinks:load', function() {
   //handle merge pregress cells
   $('.task-row').each(function(){
     var task_id = $(this).data('task-id')
-
-    $(`.task-${task_id} .task_${task_id}_progess_dates`).each(function(index){
-      if(index == 0) {
-        $(this).attr('colspan', $(`.task-${task_id} .task_${task_id}_progess_dates`).length);
-      } else {
-        $(this).remove();
-      }
-    });
+    mergeCellTable(task_id);
   });
 
   // hande click on task_progess_dates
@@ -47,3 +40,14 @@ $(document).on('turbolinks:load', function() {
     $("#task-detail-modal").modal("show");
   });
 });
+
+//function handle merge cells table
+function mergeCellTable(task_id){
+  $(`.task-${task_id} .task_${task_id}_progess_dates`).each(function(index){
+    if(index == 0) {
+      $(this).attr('colspan', $(`.task-${task_id} .task_${task_id}_progess_dates`).length);
+    } else {
+      $(this).remove();
+    }
+  });
+}
