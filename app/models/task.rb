@@ -2,7 +2,7 @@ class Task < ApplicationRecord
   before_save :set_type
 
   belongs_to :project
-  belongs_to :member
+  belongs_to :member, optional: true
   has_many :sub_tasks, class_name: 'SubTask', foreign_key: 'parent_id'
   has_many :task_notes
 
@@ -22,6 +22,8 @@ class Task < ApplicationRecord
      Task.all
     when "Activity"
       SubTask.all
+    when nil
+      Task.where.not(type: 'Activity')
     end
   end
 

@@ -1,4 +1,4 @@
-#task-detail-modal.modal[tabindex="-1" role="dialog" aria-labelledby="modalLabelLarge" aria-hidden="true" data-task-id]
+#new-task-modal.modal[tabindex="-1" role="dialog" aria-labelledby="modalLabelLarge" aria-hidden="true"]
   .modal-dialog
     .modal-content
       .modal-body
@@ -8,5 +8,5 @@
         h4#modalLabelLarge.modal-title
           | Task Detail
       .modal-footer
-        .modal_task_body
-          = render 'modal_task_body', task: @task
+        .modal_task_body.tab-content
+          = render 'user/dash_board/task/form', task: Task.new, path: user_tasks_path(Task.new)

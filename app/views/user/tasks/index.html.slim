@@ -6,7 +6,7 @@
     - @projects.each do |project|
       h4 
         = "Project #{ project.name }"
-      table.table.table-hover.index_tasks
+      table.table.table-bordered.index_tasks
         thead
           tr
             th Title
@@ -18,44 +18,56 @@
 
         tbody
           - project.tasks.each do |task|
-            tr.tasks
-              td.title = task.title
+            tr.tr-task
+              td.title
+                span = task.title
               td = task.start_date.strftime(Settings.default.date_format.full)
               td = task.working_days
               td = task.end_date.strftime(Settings.default.date_format.full)
               td = task.member&.name
               td 
-                = link_to 'Create Subtask', new_user_task_path(task, type: :SubTask, parent_id: task.id), class: "btn btn-primary"
-                = link_to 'Show', user_task_path(task), class: "btn btn-success"
-                = link_to 'Edit', edit_user_task_path(task), class: "btn btn-primary"
-                = link_to 'Destroy', user_task_path(task), data: { confirm: 'Are you sure?' }, method: :delete, class: "btn btn-danger"
+                = link_to new_user_task_path(task, type: :SubTask, parent_id: task.id) do
+                  i class="fa fa-plus icon-btn" data-project-id="#{project.id}"
+                = link_to user_task_path(task) do
+                  i class="fa fa-eye icon-btn" data-project-id="#{project.id}"
+                = link_to edit_user_task_path(task) do
+                  i class="fa fa-edit icon-btn" data-project-id="#{project.id}"
+                = link_to user_task_path(task), data: { confirm: 'Are you sure?' }, method: :delete do
+                  i class="fa fa-trash icon-btn" data-project-id="#{project.id}"
             
             - task.sub_tasks.each do |sub_task|
-              tr.sub_tasks
+              tr.tr-sub-task
                 td.title
-                  span -- 
-                  span = sub_task.title
+                  span style="padding-left: 10px !important;"
+                    = sub_task.title
                 td = sub_task.start_date.strftime(Settings.default.date_format.full)
                 td = sub_task.working_days
                 td = sub_task.end_date.strftime(Settings.default.date_format.full)
                 td = sub_task.member&.name
                 td 
-                  = link_to 'Create Activity', new_user_task_path(sub_task, type: :Activity, parent_id: sub_task.id), class: "btn btn-primary"
-                  = link_to 'Show', user_task_path(sub_task), class: "btn btn-success"
-                  = link_to 'Edit', edit_user_task_path(sub_task), class: "btn btn-primary"
-                  = link_to 'Destroy', user_task_path(sub_task), data: { confirm: 'Are you sure?' }, method: :delete, class: "btn btn-danger"
+                  = link_to new_user_task_path(task, type: :Activity, parent_id: sub_task.id) do
+                    i class="fa fa-plus icon-btn" data-project-id="#{project.id}"
+                  = link_to user_task_path(task) do
+                    i class="fa fa-eye icon-btn" data-project-id="#{project.id}"
+                  = link_to edit_user_task_path(task) do
+                    i class="fa fa-edit icon-btn" data-project-id="#{project.id}"
+                  = link_to user_task_path(task), data: { confirm: 'Are you sure?' }, method: :delete do
+                    i class="fa fa-trash icon-btn" data-project-id="#{project.id}"
 
               - sub_task.activities.each do |activity|
-                tr.activities
+                tr.tr-activity
                   td.title
-                    span --- 
-                    span = activity.title
+                    span style="padding-left: 30px !important;"
+                    = activity.title
                   td = activity.start_date.strftime(Settings.default.date_format.full)
                   td = activity.working_days
                   td = activity.end_date.strftime(Settings.default.date_format.full)
                   td = activity.member&.name
                   td 
-                    = link_to 'Show', user_task_path(activity), class: "btn btn-success"
-                    = link_to 'Edit', edit_user_task_path(activity), class: "btn btn-primary"
-                    = link_to 'Destroy', user_task_path(activity), data: { confirm: 'Are you sure?' }, method: :delete, class: "btn btn-danger"
+                    = link_to user_task_path(task) do
+                      i class="fa fa-eye icon-btn" data-project-id="#{project.id}"
+                    = link_to edit_user_task_path(task) do
+                      i class="fa fa-edit icon-btn" data-project-id="#{project.id}"
+                    = link_to user_task_path(task), data: { confirm: 'Are you sure?' }, method: :delete do
+                      i class="fa fa-trash icon-btn" data-project-id="#{project.id}"
       br

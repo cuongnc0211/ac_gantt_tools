@@ -13,11 +13,11 @@ td.target {
 }
 
 td.actual {
-  background-color: aquamarine !important;
+  // background-color: aquamarine !important;
 }
 
 .td-date {
-  background-color: aquamarine;
+  // background-color: aquamarine;
   // font-size: 12px;
   // min-width: 25px !important;
   padding: 2px !important;
@@ -83,7 +83,7 @@ td.header-project {
   background-color: #ffbb33;
   .td {
     span {
-      padding-left: 5px;
+      padding-left: 5px !important;
       text-align: left !important;
     }
   }
@@ -92,7 +92,7 @@ td.header-project {
 .tr-sub-task {
   background-color: #ffdd99;
   .title-subtask {
-    padding-left: 10px;
+    padding-left: 10px !important;
     text-align: left !important;
   }
 }
@@ -100,7 +100,7 @@ td.header-project {
 .tr-activity {
   background-color:  #ffeecc;
   .title-activity {
-    padding-left: 20px;
+    padding-left: 20px !important;
     text-align: left !important;
   }
 }

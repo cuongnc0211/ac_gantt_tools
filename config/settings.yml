@@ -10,4 +10,4 @@ default:
     full: "%d %B, %Y"
     no_year: "%d/%m"
   
-  task_color: "#ffcc66"
+  task_color: "lightskyblue"

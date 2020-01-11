@@ -1,4 +1,4 @@
-= form_for [:user, task], url: user_task_path(task), remote: true do |f|
+= form_for [:user, task], url: path, remote: true do |f|
   - if task.errors.any?
     #error_explaination
       h2 = "#{pluralize(task.errors.count, "error")} prohibited this user_member from being saved:"
@@ -24,7 +24,9 @@
     .form-group
       = f.label :start_date, class: "control-label" do
         | start_date
-      = f.text_field :start_date, class: "form-control datepicker task-start-date"
+      - start_date = f.object.start_date || Date.today
+      = f.text_field :start_date, class: "form-control datepicker task-start-date", autocomplete: "off",
+        value: start_date.strftime(Settings.default.date_format.full)
   
   .col-md-6
     .form-group
@@ -36,7 +38,9 @@
     .form-group
       = f.label :end_date, class: "control-label" do
         | end_date
-      = f.text_field :end_date, class: "form-control datepicker task-end-date"
+      - end_date = f.object.end_date || Date.today
+      = f.text_field :end_date, class: "form-control datepicker task-end-date", autocomplete: "off",
+        value: end_date.strftime(Settings.default.date_format.full)
 
   .col-md-6
     .form-group
@@ -57,7 +61,8 @@
       - f.object.parent_id ||= params[:parent_id] if params[:parent_id].present?
       = f.label :parent_id, class: "control-label" do
         | Parent Task
-      = f.select :parent_id, f.object.possible_parent_tasks.map{|t| [t.title, t.id]}, {}, { class: "form-control" }
+      = f.select :parent_id, f.object.possible_parent_tasks.map{|t| [t.title, t.id]},
+        { include_blank: true }, { class: "form-control" }
         
   .col-md-6
     .form-group

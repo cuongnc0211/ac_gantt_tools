@@ -1,0 +1,49 @@
+- case task.type
+- when "Task"
+  - tr_class = 'tr-task'
+- when "SubTask"
+  - tr_class = 'tr-sub-task'
+- when "Activity"
+  - tr_class = 'tr-activity'
+end
+
+tr class="#{tr_class} task-row task-#{task.id}" data-task-id="#{ task.id }"
+  td.tr-stattistic
+    = task.start_date.strftime(Settings.default.date_format.no_year)
+  td.tr-stattistic
+    = task.working_days
+  td.tr-stattistic
+    = task.end_date.strftime(Settings.default.date_format.no_year)
+  td.tr-stattistic
+    = task.target_progress.to_s + "%"
+  td.tr-stattistic
+      = task.target_day_to_do
+  td.tr-stattistic
+    = form_for task, url: user_task_path(task), method: :put, name: :task,
+      remote: true, html: {class: "intable-form"} do |f|
+
+      = f.number_field :actual_progress, "min": 0, "max": 100
+      = f.submit "submit", class: "hide intable-form-submit"
+  td.tr-stattistic
+    = task.actual_worked_days
+  td.tr-stattistic
+    = task.actual_days_to_do
+  td.tr-stattistic
+    = task.actual_finished_date.strftime(Settings.default.date_format.no_year)
+  td.tr-stattistic
+    = form_for task, url: user_task_path(task), method: :put, name: :task,
+      remote: true, html: {class: "intable-form"} do |f|
+
+      = f.select :status, Task.statuses.keys.map {|k| [k.humanize, k]}
+      = f.submit "submit", class: "hide intable-form-submit"
+
+  - @start_date.upto(@end_date) do |d|
+    - progess_dates_class = "task_#{task.id}_progess_dates" if task.include_date?(d)
+    - if task.marking? d
+      - color = task.member_color.presence || Settings.default.task_color
+      td class="tr-task-day task_progess_dates #{progess_dates_class} #{task_day_unq_class task, d}" style="background-color: #{ color }"
+        = render "user/dash_board/task_day_item", day: d, task: task
+
+    - else
+      td class="tr-task-day #{progess_dates_class} #{task_day_unq_class task, d} #{ weekend_class d }"
+        = render "user/dash_board/task_day_item", day: d, task: task

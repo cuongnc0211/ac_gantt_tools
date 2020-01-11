@@ -39,6 +39,25 @@ $(document).on('turbolinks:load', function() {
 
     $("#task-detail-modal").modal("show");
   });
+
+  $('.datepicker').datepicker({
+    autoclose: true,
+    dateFormat: "dd MM, yy",
+    todayBtn: true,
+    todayHighlight: true,
+    changeMonth: true,
+    changeYear: true
+  });
+
+  //handle show new task modal
+  $(document).on('click', '.dashboard-add-task', function(e){
+    $("#new_task #task_project_id").val($(this).data('project-id'));
+    $("#new_task #task_parent_id").val($(this).data('task-id'));
+    $("#new_task #task_type").val($(this).data('task-type'));
+    $("#new_task #task_working_days").val(1);
+
+    $("#new-task-modal").modal("show");
+  });
 });
 
 //function handle merge cells table

@@ -6,4 +6,4 @@
   .tab-pane.fade.in.active#note
     = simple_format task.note
   .tab-pane.fade#edit_task
-    = render 'user/dash_board/task/form', task: task
+    = render 'user/dash_board/task/form', task: task, path: user_task_path(task)

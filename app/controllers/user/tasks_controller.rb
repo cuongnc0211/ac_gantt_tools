@@ -1,5 +1,6 @@
 class User::TasksController < User::BaseController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_date_period
   # GET /user/tasks
   # GET /user/tasks.json
   def index
@@ -76,6 +77,11 @@ class User::TasksController < User::BaseController
 
   def set_task
     @task = Task.find(params[:id])
+  end
+  
+  def set_date_period
+    @start_date ||= Date.today.beginning_of_quarter
+    @end_date ||= Date.today.end_of_quarter
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

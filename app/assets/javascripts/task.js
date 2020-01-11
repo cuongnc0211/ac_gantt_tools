@@ -1,6 +1,6 @@
 $(document).on('turbolinks:load', function() {
-  $(".task-end-date").on("change", function(){
-    if($(".task-start-date").val().length > 0){
+  $(document).on('change', '.task-end-date, .task-start-date', function(){
+    if($(".task-start-date").val().length > 0 && $(".task-end-date").val().length > 0){
       var workingDays = countWorkingDays();
       $(".task-working-day").val(workingDays);
     }
