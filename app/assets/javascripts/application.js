@@ -19,3 +19,9 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+$(document).on('turbolinks:load', function() {
+  if($("#today-anchor1").length > 0) {
+    location.hash = '#' + 'today-anchor1';
+  }
+});

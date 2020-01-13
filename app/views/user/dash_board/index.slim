@@ -44,10 +44,8 @@
         td colspan=("#{month.end_of_month.day}") class=("td-months td-month-#{month.month}")
           = month.strftime("%B")
 
-    - @start_date = Date.today.beginning_of_quarter
-    - @end_date = Date.today.end_of_quarter
-    - @projects.each do |project|
-      = render "days_bar"
+    - @projects.each_with_index do |project, index|
+      = render "days_bar", index: index
       tbody class="project-tasks-container project-#{project.id}-tasks"
         / = render partial: "task_progress_bar_tr", collection: project.tasks, as: :task, locals: { start_date: @start_date, end_date: @end_date }
 

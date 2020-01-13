@@ -11,7 +11,7 @@ tr
   td.header-project.actual Status
 
   - @start_date.upto(@end_date) do |d|
-    td class="td-date #{ weekend_class d }"
+    td class="td-date #{ weekend_class d }" id="#{'today-anchor' if d == Date.today && index == 0}"
       span = d.day
       br
       span = d.strftime("%a")
