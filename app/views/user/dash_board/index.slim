@@ -11,7 +11,7 @@
           b = project.name
           span
             i class="fa fa-plus pull-right dashboard-add-task" data-project-id="#{project.id}" data-task-type='Task'
-      - project.tasks.each do |task|
+      - @tasks.select {|t| t.project_id == project.id && t.type == 'Task'}.each do |task|
         tr.tr-task
           td
             span = task.title
@@ -49,7 +49,7 @@
       tbody class="project-tasks-container project-#{project.id}-tasks"
         / = render partial: "task_progress_bar_tr", collection: project.tasks, as: :task, locals: { start_date: @start_date, end_date: @end_date }
 
-        - project.tasks.each do |task|
+        - @tasks.select {|t| t.project_id == project.id && t.type == 'Task'}.each.each do |task|
           tr.tr-task class="task-row task-#{task.id}" data-task-id="#{ task.id }"
             = render "task_progress_bar", task: task, start_date: @start_date, end_date: @end_date
 

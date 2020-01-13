@@ -10,6 +10,10 @@ class Task < ApplicationRecord
 
   enum status: { not_started: 0, in_progress: 1, finished: 2, delay: 3 }
 
+  scope :in_quater, -> (start_date, end_date) {
+    where(start_date: start_date..end_date)
+  }
+
   def self.types
     %w[Task SubTask Activity]
   end

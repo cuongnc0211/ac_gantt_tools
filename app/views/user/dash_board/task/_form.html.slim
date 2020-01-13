@@ -71,10 +71,10 @@
       = f.select :status, Task.statuses.keys.map {|m| [m, m]}, {}, { class: "form-control" }
 
   .col-md-12
-      .form-group
-        = f.label :note, class: "control-label" do
-          | Note
-        = f.text_area :note, class: "form-control", "rows": 10
+    .form-group
+      = f.label :note, class: "control-label" do
+        | Note
+      = f.text_area :note, class: "form-control", "rows": 10
 
   .col-md-12
     .form-group

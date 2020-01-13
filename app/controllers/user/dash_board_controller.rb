@@ -1,7 +1,8 @@
 class User::DashBoardController < User::BaseController
   def index
     @task = Task.first
-    @projects = Project.all.includes(tasks: [:member, sub_tasks: [:member, activities: :member]])
     load_dates
+    @projects = Project.all
+    @tasks = Task.in_quater(@start_date, @end_date)
   end
 end
