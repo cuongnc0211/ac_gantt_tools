@@ -45,13 +45,13 @@
                 td = sub_task.end_date.strftime(Settings.default.date_format.full)
                 td = sub_task.member&.name
                 td 
-                  = link_to new_user_task_path(task, type: :Activity, parent_id: sub_task.id) do
+                  = link_to new_user_task_path(sub_task, type: :Activity, parent_id: sub_task.id) do
                     i class="fa fa-plus icon-btn" data-project-id="#{project.id}"
-                  = link_to user_task_path(task) do
+                  = link_to user_task_path(sub_task) do
                     i class="fa fa-eye icon-btn" data-project-id="#{project.id}"
-                  = link_to edit_user_task_path(task) do
+                  = link_to edit_user_task_path(sub_task) do
                     i class="fa fa-edit icon-btn" data-project-id="#{project.id}"
-                  = link_to user_task_path(task), data: { confirm: 'Are you sure?' }, method: :delete do
+                  = link_to user_task_path(sub_task), data: { confirm: 'Are you sure?' }, method: :delete do
                     i class="fa fa-trash icon-btn" data-project-id="#{project.id}"
 
               - sub_task.activities.each do |activity|
@@ -64,10 +64,10 @@
                   td = activity.end_date.strftime(Settings.default.date_format.full)
                   td = activity.member&.name
                   td 
-                    = link_to user_task_path(task) do
+                    = link_to user_task_path(activity) do
                       i class="fa fa-eye icon-btn" data-project-id="#{project.id}"
-                    = link_to edit_user_task_path(task) do
+                    = link_to edit_user_task_path(activity) do
                       i class="fa fa-edit icon-btn" data-project-id="#{project.id}"
-                    = link_to user_task_path(task), data: { confirm: 'Are you sure?' }, method: :delete do
+                    = link_to user_task_path(activity), data: { confirm: 'Are you sure?' }, method: :delete do
                       i class="fa fa-trash icon-btn" data-project-id="#{project.id}"
       br
