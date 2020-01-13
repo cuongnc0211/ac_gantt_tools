@@ -25,7 +25,7 @@ $(document).on('turbolinks:load', function() {
     $.ajax({
       async : true,
       type : "GET",
-      url : `/user/tasks/${task_id}/modal_task_detail`
+      url : '/user/tasks/' + task_id + '/modal_task_detail'
     }).done(function() {
       $('.datepicker').datepicker({
         autoclose: true,
@@ -62,9 +62,11 @@ $(document).on('turbolinks:load', function() {
 
 //function handle merge cells table
 function mergeCellTable(task_id){
-  $(`.task-${task_id} .task_${task_id}_progess_dates`).each(function(index){
+  var container = '.task-' + task_id + ' .task_' + task_id + '_progess_dates'
+  $(container).each(function(index){
     if(index == 0) {
-      $(this).attr('colspan', $(`.task-${task_id} .task_${task_id}_progess_dates`).length);
+      var length = $(container).length
+      $(this).attr('colspan', length);
     } else {
       $(this).remove();
     }
