@@ -1,5 +1,5 @@
 - Settings.flash.each do |key, value|
   - if flash[key].present?
-    .alert class="#{value}"
+    .alert.flash-notice class="#{value}"
       a.close aria-hidden="true" data-dismiss="alert" href="#"  ×
       = flash[key]

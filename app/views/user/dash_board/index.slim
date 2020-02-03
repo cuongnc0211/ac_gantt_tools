@@ -1,5 +1,7 @@
 - breadcrumb :root
 
+p
+  = link_to "New Project", new_user_project_path(is_dashboard: true), class: "btn btn-primary"
 .dashboard_container
   table.tbl#info
     tr.tr-month

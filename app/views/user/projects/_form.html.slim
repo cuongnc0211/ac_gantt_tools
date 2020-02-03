@@ -1,5 +1,6 @@
 .col-md-8.col-md-offset-2.js-medium-form
   = form_for [:user, @project] do |f|
+    = hidden_field_tag :is_dashboard, params[:is_dashboard]
     - if @project.errors.any?
       #error_explanation
         h2 = "#{pluralize(@project.errors.count, "error")} prohibited this user_member from being saved:"

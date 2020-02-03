@@ -28,7 +28,7 @@ class User::TasksController < User::BaseController
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to user_task_path(@task), notice: 'Task was successfully created.' }
+        format.html { redirect_to user_tasks_path, notice: 'Task was successfully created.' }
         format.json { render :show, status: :created, location: @task }
       else
         format.html { render :new }
@@ -45,7 +45,7 @@ class User::TasksController < User::BaseController
     @end_date = Date.today.end_of_quarter
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to user_task_path(@task), notice: 'Task was successfully updated.' }
+        format.html { redirect_to user_tasks_path, notice: 'Task was successfully updated.' }
         format.json { render :show, status: :ok, location: @task }
       else
         format.html { render :edit }

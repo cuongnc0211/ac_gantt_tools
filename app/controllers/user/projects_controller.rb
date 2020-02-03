@@ -26,9 +26,10 @@ class User::ProjectsController < User::BaseController
   def create
     @project = Project.new(project_params)
 
+    success_path = params[:is_dashboard] ? root_path : user_projects_path
     respond_to do |format|
       if @project.save
-        format.html { redirect_to user_project_path(@project), notice: 'Project was successfully created.' }
+        format.html { redirect_to success_path, notice: 'Project was successfully created.' }
         format.json { render :show, status: :created, location: @project }
       else
         format.html { render :new }
