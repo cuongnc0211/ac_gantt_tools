@@ -2,7 +2,7 @@
   .box-body
     h1 Editing Task
     => link_to 'Show', user_task_path(@task)
-    '|
+    '|'
     =< link_to 'Back', user_tasks_path
   .box-footer
     == render 'form', task: @task, url: user_task_path(@task)

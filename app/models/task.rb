@@ -40,10 +40,11 @@ class Task < ApplicationRecord
   end
 
   def target_progress
-    return 0 if not_cal_statistic?
+    # return 0 if not_cal_statistic?
     return 100 if finished? || end_date < Date.today
 
-    (Task.working_days start_date, Date.today) / working_days * 100
+    percent = (Task.working_days start_date, Date.today).to_f / working_days.to_f * 100
+    percent.round(0)
   end
 
   def target_day_to_do

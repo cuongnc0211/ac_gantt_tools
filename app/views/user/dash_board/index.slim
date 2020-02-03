@@ -34,9 +34,8 @@
     tr.tr-months
       td.target colspan="5"
         | Target
-      td.actual colspan="4"
+      td.actual colspan="2"
         | Actual
-      td.actual
 
       - current_month = Date.today.beginning_of_quarter
       - (0..2).to_a.each do |n|
