@@ -1,33 +1,3 @@
-td.tr-stattistic
-  = task.start_date.strftime(Settings.default.date_format.no_year)
-td.tr-stattistic
-  = task.working_days
-td.tr-stattistic
-  = task.end_date.strftime(Settings.default.date_format.no_year)
-td.tr-stattistic
-  = task.target_progress.to_s + "%"
-td.tr-stattistic
-    = task.target_day_to_do
-td.tr-stattistic
-  = form_for task, url: user_task_path(task), method: :put, name: :task,
-    remote: true, html: {class: "intable-form"} do |f|
-
-    = f.number_field :actual_progress, "min": 0, "max": 100,
-      class: "#{progress_class(task.actual_progress, task.target_progress)}"
-    = f.submit "submit", class: "hide intable-form-submit"
-/ td.tr-stattistic
-/   = task.actual_worked_days
-/ td.tr-stattistic
-/   = task.actual_days_to_do
-/ td.tr-stattistic
-/   = task.actual_finished_date.strftime(Settings.default.date_format.no_year)
-td.tr-stattistic
-  = form_for task, url: user_task_path(task), method: :put, name: :task,
-    remote: true, html: {class: "intable-form"} do |f|
-
-    = f.select :status, Task.statuses.keys.map {|k| [k.humanize, k]}, {}, class: "#{status_class(f.object.status)}"
-    = f.submit "submit", class: "hide intable-form-submit"
-
 - @start_date.upto(@end_date) do |d|
   - progess_dates_class = "task_#{task.id}_progess_dates" if task.include_date?(d)
   - if task.marking? d
@@ -36,5 +6,5 @@ td.tr-stattistic
       = render "user/dash_board/task_day_item", day: d, task: task
 
   - else
-    td class="tr-task-day #{progess_dates_class} #{task_day_unq_class task, d} #{ weekend_class d }"
+    td class="tr-task-day #{progess_dates_class} #{task_day_unq_class task, d}"
       = render "user/dash_board/task_day_item", day: d, task: task

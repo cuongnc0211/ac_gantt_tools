@@ -34,7 +34,7 @@ td.actual {
 }
 
 #info {
-  width: 170px;
+  width: 650px;
   overflow-x: hidden;
 
   tr.title {
@@ -42,13 +42,13 @@ td.actual {
   }
 
   td, th {
-    width: 70px;
+    // width: 70px;
     // height: 39px;
     text-align: left;
   }
 }
 #details {
-  width: calc(100% - 170px);
+  width: calc(100% - 650px);
   overflow-x: scroll;
   overflow-y: hidden;
   display: inline-block;
@@ -70,9 +70,12 @@ td.actual {
 }
 
 td.header-project {
-  min-width: 50px !important;
   // height: 60px;
   background-color: lightyellow !important;
+}
+
+td.header-date {
+  height: 65px !important;
 }
 
 .weekend {
@@ -83,7 +86,7 @@ td.header-project {
   background-color: #ff5c5c !important;
 }
 
-.tr-task {
+#info .tr-task {
   background-color: #ffbb33;
   .td {
     span {
@@ -93,7 +96,17 @@ td.header-project {
   }
 }
 
-.tr-sub-task {
+.tr-task {
+  background-color: lightsteelblue;
+  .td {
+    span {
+      padding-left: 5px !important;
+      text-align: left !important;
+    }
+  }
+}
+
+#info .tr-sub-task {
   background-color: #ffdd99;
   .title-subtask {
     padding-left: 10px !important;
@@ -101,8 +114,24 @@ td.header-project {
   }
 }
 
-.tr-activity {
+.tr-sub-task {
+  background-color: lightsteelblue;
+  .title-subtask {
+    padding-left: 10px !important;
+    text-align: left !important;
+  }
+}
+
+#info .tr-activity {
   background-color:  #ffeecc;
+  .title-activity {
+    padding-left: 20px !important;
+    text-align: left !important;
+  }
+}
+
+.tr-activity {
+  background-color: lightsteelblue;
   .title-activity {
     padding-left: 20px !important;
     text-align: left !important;

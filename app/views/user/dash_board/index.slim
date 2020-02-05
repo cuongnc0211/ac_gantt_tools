@@ -7,38 +7,50 @@ p
     tr.tr-month
       td
         | Projects/Tasks
+      td.target colspan="5"
+          | Target
+      td.actual colspan="2"
+        | Actual
     - @projects.each do |project|
       tr.tr-project-name
         td.header-project
           b = project.name
           span
             i class="fa fa-plus pull-right dashboard-add-task" data-project-id="#{project.id}" data-task-type='Task'
+        td.header-project.target Start
+        td.header-project.target Days
+        td.header-project.target End
+        td.header-project.target T.Progress
+        td.header-project.target Days left
+        td.header-project.actual A.Progress(%)
+        / td.header-project.actual Working days
+        / td.header-project.actual Days-to-do
+        / td.header-project.actual Finish date
+        td.header-project.actual Status
       - @tasks.select {|t| t.project_id == project.id && t.type == 'Task'}.each do |task|
         tr.tr-task
           td
-            span = task.title
+            span = task.title.truncate(25)
             span
               i class="fa fa-plus pull-right dashboard-add-task" data-project-id="#{project.id}" data-task-id="#{task.id}" data-task-type='SubTask'
+          = render "task_info", task: task
         - task.sub_tasks.each do |sub_task|
           tr.tr-sub-task
             td.sub-task
               span.title-subtask
-                = "#{sub_task.title}"
+                = "#{sub_task.title.truncate(25)}"
               span
                 i class="fa fa-plus pull-right dashboard-add-task" data-project-id="#{project.id}" data-task-id="#{sub_task.id}" data-task-type='Activity'
+            = render "task_info", task: sub_task
           - sub_task.activities.each do |activity|
             tr.tr-activity
               td
                 span.title-activity
-                  = "#{activity.title}"
+                  = "#{activity.title.truncate(25)}"
+              = render "task_info", task: activity
 
   table.tbl#details
     tr.tr-months
-      td.target colspan="5"
-        | Target
-      td.actual colspan="2"
-        | Actual
-
       - current_month = Date.today.beginning_of_quarter
       - (0..2).to_a.each do |n|
         - month = current_month + n.months
