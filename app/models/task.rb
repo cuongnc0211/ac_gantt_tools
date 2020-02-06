@@ -27,6 +27,13 @@ class Task < ApplicationRecord
     end
   end
 
+  def avg_parent_prg
+    chilrent = self.childrent
+    return actual_progress if ( self.type != 'Task' || chilrent.blank?)
+
+    chilrent.pluck(:actual_progress).sum / chilrent.count
+  end
+
   def update_parent_date
     return if self.type == 'Task'
 
