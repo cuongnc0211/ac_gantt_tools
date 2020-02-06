@@ -46,6 +46,7 @@ class User::TasksController < User::BaseController
     @project = @task.project
     respond_to do |format|
       if @task.update(task_params)
+        @parent_task = @task.update_parent_date
         format.html { redirect_to user_tasks_path, notice: 'Task was successfully updated.' }
         format.json { render :show, status: :ok, location: @task }
       else

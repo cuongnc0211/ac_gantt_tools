@@ -63,7 +63,8 @@
       - f.object.parent_id ||= params[:parent_id] if params[:parent_id].present?
       = f.label :parent_id, class: "control-label" do
         | Parent Task
-      = f.select :parent_id, f.object.possible_parent_tasks.map{|t| [t.title, t.id]}, {}, { class: "form-control" }
+      = f.select :parent_id, f.object.possible_parent_tasks.map{|t| [t.title, t.id]}, 
+        { include_blank: true }, { class: "form-control" }
         
   .col-md-6
     .form-group

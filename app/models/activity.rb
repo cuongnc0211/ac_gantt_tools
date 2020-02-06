@@ -4,6 +4,10 @@ class Activity < Task
   belongs_to :sub_task, class_name: "SubTask", foreign_key: "parent_id"
   belongs_to :parent, class_name: "SubTask", foreign_key: "parent_id"
 
+  def root_parent
+    self.parent.parent
+  end
+
   private
 
   def set_type

@@ -27,6 +27,20 @@ class Task < ApplicationRecord
     end
   end
 
+  def update_parent_date
+    return if self.type == 'Task'
+
+    parent    = self.root_parent
+    childrent = parent.childrent
+    soonest   = childrent.sort_by {|c| c.start_date}.first
+    latest    = childrent.sort_by {|c| c.end_date}.last
+
+    parent.start_date = soonest.start_date if soonest.start_date < parent.start_date
+    parent.end_date = latest.end_date if latest.end_date > parent.end_date
+    parent.save
+    parent
+  end
+
   def self.types
     %w[Task SubTask Activity]
   end
