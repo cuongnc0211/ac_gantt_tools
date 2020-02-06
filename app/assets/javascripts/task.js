@@ -20,9 +20,10 @@ function countWorkingDays(){
   var working_days = 0;
 
   for (var day = initial_time; day <= end_time; day.setDate(day.getDate() + 1)) {
-    if(day.getDay() != 6 && day.getDay() != 0){
-      working_days += 1
-    }
+    // if(day.getDay() != 6 && day.getDay() != 0){
+    //   working_days += 1
+    // }
+    working_days += 1
   }
   return working_days;
 }

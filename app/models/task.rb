@@ -1,5 +1,5 @@
 class Task < ApplicationRecord
-  before_save :set_type
+  before_save :set_type, :recalculate_working_days
 
   belongs_to :project
   belongs_to :member, optional: true
@@ -35,8 +35,8 @@ class Task < ApplicationRecord
     soonest   = childrent.sort_by {|c| c.start_date}.first
     latest    = childrent.sort_by {|c| c.end_date}.last
 
-    parent.start_date = soonest.start_date if soonest.start_date < parent.start_date
-    parent.end_date = latest.end_date if latest.end_date > parent.end_date
+    parent.start_date = soonest.start_date
+    parent.end_date = latest.end_date
     parent.save
     parent
   end
@@ -117,7 +117,7 @@ class Task < ApplicationRecord
     return if start_date.nil? || end_date.nil?
 
     start_date.to_date.upto(end_date.to_date) do |d|
-      next if d.saturday? || d.sunday?
+      # next if d.saturday? || d.sunday?
 
       days += 1
     end
@@ -141,6 +141,10 @@ class Task < ApplicationRecord
 
   def set_type
     self.type = 'Task'
+  end
+
+  def recalculate_working_days
+    self.working_days = Task.working_days(start_date, end_date)
   end
 
   def not_cal_statistic?
