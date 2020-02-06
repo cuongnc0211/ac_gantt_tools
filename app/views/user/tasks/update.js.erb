@@ -1,3 +1,4 @@
-$(".task-<%= @task.id %>").html("<%= j render "user/dash_board/task_progress_bar", task: @task, start_date: @start_date, end_date: @end_date %>");
+$("#details .task-<%= @task.id %>").html("<%= j render "user/dash_board/task_progress_bar", task: @task, start_date: @start_date, end_date: @end_date %>");
+$("#info .task-<%= @task.id %>").html("<%= j render "user/dash_board/info/task", task: @task, project: @project %>");
 mergeCellTable("<%= @task.id %>");
 $("#task-detail-modal").modal("hide");

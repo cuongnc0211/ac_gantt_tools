@@ -1,4 +1,6 @@
 $(document).on('turbolinks:load', function() {
+  $('.scrollable').animate({scrollLeft: $('#today-anchor').position().left -900});
+
   $(document).on("change", ".intable-form input", function(){
     $(this).closest("form").find(".intable-form-submit").click();
   });
@@ -14,7 +16,7 @@ $(document).on('turbolinks:load', function() {
   });
 
   // hande click on task_progess_dates
-  $(document).on('click', '.task_progess_dates a', function(e){
+  $(document).on('click', '.task_show_modal', function(e){
     e.preventDefault();
 
     var form = $("#task-detail-modal").find("form");

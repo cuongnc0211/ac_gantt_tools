@@ -2,9 +2,9 @@
   - progess_dates_class = "task_#{task.id}_progess_dates" if task.include_date?(d)
   - if task.marking? d
     - color = task.member_color.presence || Settings.default.task_color
-    td class="tr-task-day task_progess_dates #{progess_dates_class} #{task_day_unq_class task, d}" style="background-color: #{ color }"
+    td class="tr-task-day task_progess_dates #{ today_class d } #{progess_dates_class} #{task_day_unq_class task, d}" style="background-color: #{ color }"
       = render "user/dash_board/task_day_item", day: d, task: task
 
   - else
-    td class="tr-task-day #{progess_dates_class} #{task_day_unq_class task, d}"
+    td class="tr-task-day #{ today_class d } #{progess_dates_class} #{task_day_unq_class task, d}"
       = render "user/dash_board/task_day_item", day: d, task: task

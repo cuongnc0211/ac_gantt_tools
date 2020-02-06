@@ -43,6 +43,7 @@ class User::TasksController < User::BaseController
   def update
     @start_date = Date.today.beginning_of_quarter
     @end_date = Date.today.end_of_quarter
+    @project = @task.project
     respond_to do |format|
       if @task.update(task_params)
         format.html { redirect_to user_tasks_path, notice: 'Task was successfully updated.' }

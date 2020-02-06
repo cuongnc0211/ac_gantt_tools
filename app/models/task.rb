@@ -4,6 +4,7 @@ class Task < ApplicationRecord
   belongs_to :project
   belongs_to :member, optional: true
   has_many :sub_tasks, class_name: 'SubTask', foreign_key: 'parent_id'
+  has_many :activities, through: :sub_tasks
   has_many :task_notes
 
   delegate :color, to: :member, prefix: true, allow_nil: true
@@ -13,6 +14,18 @@ class Task < ApplicationRecord
   scope :in_quater, -> (start_date, end_date) {
     where(start_date: start_date..end_date)
   }
+
+  def childrent
+    self.sub_tasks + self.activities
+  end
+
+  def show_title
+    if note.present?
+      "<i class='fa fa-book' style='font-size: 11px; color: red;'></i>" + title.truncate(22)
+    else
+      title.truncate(22)
+    end
+  end
 
   def self.types
     %w[Task SubTask Activity]

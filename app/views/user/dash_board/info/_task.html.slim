@@ -1,0 +1,23 @@
+- case task.type
+- when 'Task'
+  td
+    a.task_show_modal
+      span
+        = raw task.show_title
+    span
+      i class="fa fa-plus pull-right dashboard-add-task" data-project-id="#{project.id}" data-task-id="#{task.id}" data-task-type='SubTask'
+  = render "user/dash_board/task_info", task: task
+- when 'SubTask'
+  td.sub-task
+    a.task_show_modal
+      span.title-subtask
+        = raw task.show_title
+    span
+      i class="fa fa-plus pull-right dashboard-add-task" data-project-id="#{project.id}" data-task-id="#{task.id}" data-task-type='Activity'
+  = render "user/dash_board/task_info", task: task
+- when 'Activity'
+  td
+    a.task_show_modal
+      span.title-activity
+        = raw task.show_title
+  = render "user/dash_board/task_info", task: task

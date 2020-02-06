@@ -28,28 +28,17 @@ p
         / td.header-project.actual Finish date
         td.header-project.actual Status
       - @tasks.select {|t| t.project_id == project.id && t.type == 'Task'}.each do |task|
-        tr.tr-task
-          td
-            span = task.title.truncate(25)
-            span
-              i class="fa fa-plus pull-right dashboard-add-task" data-project-id="#{project.id}" data-task-id="#{task.id}" data-task-type='SubTask'
-          = render "task_info", task: task
+        tr.tr-task class="info-task-#{task.id} task-#{task.id}" data-task-id="#{ task.id }"
+          = render "user/dash_board/info/task", task: task, project: project
         - task.sub_tasks.each do |sub_task|
-          tr.tr-sub-task
-            td.sub-task
-              span.title-subtask
-                = "#{sub_task.title.truncate(25)}"
-              span
-                i class="fa fa-plus pull-right dashboard-add-task" data-project-id="#{project.id}" data-task-id="#{sub_task.id}" data-task-type='Activity'
-            = render "task_info", task: sub_task
+          tr.tr-sub-task class="info-task-#{sub_task.id} task-#{sub_task.id}" data-task-id="#{ sub_task.id }"
+            = render "user/dash_board/info/task", task: sub_task, project: project
           - sub_task.activities.each do |activity|
-            tr.tr-activity
-              td
-                span.title-activity
-                  = "#{activity.title.truncate(25)}"
-              = render "task_info", task: activity
+            tr.tr-activity class="info-task-#{activity.id} task-#{activity.id}" data-task-id="#{ activity.id }"
+              = render "user/dash_board/info/task", task: activity, project: project
+              
 
-  table.tbl#details
+  table.tbl#details.scrollable
     tr.tr-months
       - current_month = Date.today.beginning_of_quarter
       - (0..2).to_a.each do |n|
