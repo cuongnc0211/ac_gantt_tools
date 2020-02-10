@@ -75,6 +75,15 @@ class User::TasksController < User::BaseController
     end
   end
 
+  def possible_parent_tasks
+    @tasks = Task.new(type: params[:type]).possible_parent_tasks
+    data = @tasks.map do |i|
+      [i.title, i.id]
+    end
+
+    render json: {data: data}
+  end
+
   private
 
   def set_task

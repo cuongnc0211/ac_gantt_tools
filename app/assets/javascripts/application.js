@@ -19,6 +19,7 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+//= require select2
 
 $(document).on('turbolinks:load', function() {
   if($("#today-anchor1").length > 0) {

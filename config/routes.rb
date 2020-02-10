@@ -6,6 +6,9 @@ Rails.application.routes.draw do
       member do
         get :modal_task_detail
       end
+      collection do
+        get :possible_parent_tasks
+      end
     end
     resources :task_notes, only: [:create, :update]
   end

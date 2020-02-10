@@ -1,5 +1,7 @@
 $(document).on('turbolinks:load', function() {
-  $('.scrollable').animate({scrollLeft: $('#today-anchor').position().left -900});
+  if($(".scrollable").length > 0) {
+    $('.scrollable').animate({scrollLeft: $('#today-anchor').position().left -900});
+  }
 
   $(document).on("change", ".intable-form input", function(){
     $(this).closest("form").find(".intable-form-submit").click();
@@ -59,6 +61,36 @@ $(document).on('turbolinks:load', function() {
     $("#new_task #task_working_days").val(1);
 
     $("#new-task-modal").modal("show");
+  });
+
+  $(".select-parent-id").select2({});
+
+  $(document).on("change", ".select_task_type", function(){    
+    var task_type = $(this).val()
+    $.ajax({
+      async : true,
+      type : "GET",
+      url : "/user/tasks/possible_parent_tasks.json",
+      dataType : "json",
+      data: {
+        type: task_type
+      },
+      success : function(res) {
+        // createJSTrees(res.data);
+        if(res['data'].length > 0){
+          var rendered_html = ""
+          for (key in res['data']) {
+            rendered_html += ('<option value="' + res['data'][key][1] + '">' + res['data'][key][0] + '</option>');
+          }
+          $(".select-parent-id").html(rendered_html);
+          $(".select-parent-id").select2({});
+        }
+      },
+      error : function(xhr, ajaxOptions, thrownError) {
+        alert(xhr.status);
+        alert(thrownError);
+      }
+    });
   });
 });
 

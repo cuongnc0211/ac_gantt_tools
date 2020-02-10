@@ -54,7 +54,7 @@
       - f.object.type ||= params[:type] if params[:type].present?
       = f.label :type, class: "control-label" do
         | Type
-      = f.select :type, Task.types.map {|m| [m, m]}, {}, { class: "form-control" }
+      = f.select :type, Task.types.map {|m| [m, m]}, {}, { class: "form-control select_task_type" }
   
   .col-md-6
     .form-group
@@ -62,7 +62,7 @@
       = f.label :parent_id, class: "control-label" do
         | Parent Task
       = f.select :parent_id, f.object.possible_parent_tasks.map{|t| [t.title, t.id]},
-        { include_blank: true }, { class: "form-control" }
+        { include_blank: true }, { class: "form-control select-parent-id" }
         
   .col-md-6
     .form-group

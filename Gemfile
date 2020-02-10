@@ -86,3 +86,5 @@ gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'mast
 gem 'pry', '~> 0.12.2'
 
 gem 'gon'
+
+gem "select2-rails"

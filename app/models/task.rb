@@ -11,8 +11,15 @@ class Task < ApplicationRecord
 
   enum status: { not_started: 0, in_progress: 1, finished: 2, delay: 3 }
 
+  START_DATE = Date.today.beginning_of_quarter
+  END_DATE   = Date.today.end_of_quarter
+
   scope :in_quater, -> (start_date, end_date) {
     where(start_date: start_date..end_date)
+  }
+
+  scope :quater, -> {
+    where(start_date: START_DATE..END_DATE)
   }
 
   def childrent
@@ -57,11 +64,11 @@ class Task < ApplicationRecord
     when "Task"
       return []
     when "SubTask"
-     Task.all
+     Task.where(type: :Task).quater
     when "Activity"
-      SubTask.all
+      SubTask.all.quater
     when nil
-      Task.where.not(type: 'Activity')
+      Task.where.not(type: 'Activity').quater
     end
   end
 
