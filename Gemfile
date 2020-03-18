@@ -88,3 +88,7 @@ gem 'pry', '~> 0.12.2'
 gem 'gon'
 
 gem "select2-rails"
+
+gem 'react-rails'
+
+gem 'active_model_serializers'
